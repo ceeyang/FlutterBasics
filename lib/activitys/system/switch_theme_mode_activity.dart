@@ -5,8 +5,8 @@ import 'package:flutter_basics/configs/const_value_key.dart';
 import 'package:flutter_basics/generated/i18n.dart';
 import 'package:flutter_basics/plugins/plugin_event_bus.dart';
 import 'package:flutter_basics/utils/support_models.dart';
-import 'package:flutter_basics/views/common_lmv_rs_group.dart';
-import 'package:flutter_basics/views/custom_app_bar.dart';
+import 'package:flutter_basics/common_widgets/common_lmv_rs_group.dart';
+import 'package:flutter_basics/common_widgets/custom_app_bar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// 枚举: 主题模式

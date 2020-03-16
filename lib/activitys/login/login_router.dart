@@ -1,12 +1,10 @@
-/**
- * @author solox
- * @time 2020/3/16 0016-9:40
- * @login_router.dart
- * @desc：为登入模块各个页面设置不同的路由
- */
+/// @author solox
+/// @time 2020/3/16 0016-9:40
+/// @login_router.dart
+/// @desc：为登入模块各个页面设置不同的路由
 
 import 'package:fluro/fluro.dart';
-import 'package:flutter_basics/mvvm/login/page/login_activity.dart';
+import 'package:flutter_basics/activitys/login/login_activity.dart';
 import 'package:flutter_basics/routers/router_init.dart';
 
 class LoginRouter implements IRouterProvider {

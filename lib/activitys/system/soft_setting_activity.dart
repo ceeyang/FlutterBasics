@@ -6,8 +6,8 @@ import 'package:flutter_basics/configs/const_value_key.dart';
 import 'package:flutter_basics/generated/i18n.dart';
 import 'package:flutter_basics/plugins/plugin_page_routes.dart';
 import 'package:flutter_basics/utils/support_models.dart';
-import 'package:flutter_basics/views/custom_app_bar.dart';
-import 'package:flutter_basics/views/line_menu_view.dart';
+import 'package:flutter_basics/common_widgets/custom_app_bar.dart';
+import 'package:flutter_basics/common_widgets/line_menu_view.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 import 'switch_support_locale_activity.dart';

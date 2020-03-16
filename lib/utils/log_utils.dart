@@ -1,6 +1,6 @@
 import 'dart:convert' as convert;
 import 'package:common_utils/common_utils.dart';
-import '../constant.dart';
+import 'package:flutter_basics/configs/constant_config.dart';
 
 /// 输出Log工具类
 class Log {

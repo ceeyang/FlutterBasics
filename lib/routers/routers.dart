@@ -1,15 +1,14 @@
-/**
- * @author solox
- * @time 2020/3/13 0013-13:56
- * @routers.dart
- * @desc： 页面路由统一管理
- */
+/// @author solox
+/// @time 2020/3/13 0013-13:56
+/// @routers.dart
+/// @desc： 页面路由统一管理
+
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_basics/activitys/home/home_activity.dart';
-import 'package:flutter_basics/mvvm/login/login_router.dart';
+import 'package:flutter_basics/activitys/login/login_router.dart';
 import 'package:flutter_basics/routers/router_init.dart';
-import 'package:flutter_basics/web/webview_page.dart';
+import 'package:flutter_basics/plugins/plugin_webview_activity.dart';
 
 import '404.dart';
 

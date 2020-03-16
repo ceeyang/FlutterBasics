@@ -1,14 +1,11 @@
-/**
- * @author solox
- * @time 2020/3/13 0013-14:40
- * @login_repository.dart
- * @desc： 登入数据仓库
- */
+/// @author solox
+/// @time 2020/3/13 0013-14:40
+/// @login_repository.dart
+/// @desc： 登入数据仓库
 import 'package:flustars/flustars.dart';
 import 'package:flutter_basics/bean/user.dart';
 import 'package:flutter_basics/bean/userbean.dart';
 import 'package:flutter_basics/configs/constant_config.dart';
-import 'package:flutter_basics/constant.dart';
 import 'package:flutter_basics/http/api_utils.dart';
 import 'package:flutter_basics/http/base_resp.dart';
 import 'package:flutter_basics/http/dio_util.dart';

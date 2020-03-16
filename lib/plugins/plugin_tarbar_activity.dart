@@ -34,8 +34,6 @@ class _PluginTabarActivityState extends State<PluginTabarActivity> {
   @override
   Widget build(BuildContext context) {
     return
-
-
       Scaffold(
       body: pages[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
