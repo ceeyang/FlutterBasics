@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_basics/activitys/home/home_activity.dart';
 import 'package:flutter_basics/activitys/mine/mine_activity.dart';
 import 'package:flutter_basics/activitys/modul/moduls_activity.dart';
-import 'package:flutter_basics/activitys/system/switch_theme_mode_activity.dart';
 import 'package:flutter_basics/generated/i18n.dart';
 
 class PluginTabarActivity extends StatefulWidget {
@@ -34,7 +33,10 @@ class _PluginTabarActivityState extends State<PluginTabarActivity> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return
+
+
+      Scaffold(
       body: pages[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,

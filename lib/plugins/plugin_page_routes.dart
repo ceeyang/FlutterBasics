@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_basics/activitys/home/home_activity.dart';
-import 'package:flutter_basics/activitys/login/login_activity.dart';
 import 'package:flutter_basics/activitys/system/soft_setting_activity.dart';
 import 'package:flutter_basics/activitys/system/switch_support_locale_activity.dart';
 import 'package:flutter_basics/activitys/system/switch_theme_mode_activity.dart';
+import 'package:flutter_basics/mvvm/login/page/login_activity.dart';
 
 /// 当前的所有的Activity (仿 ARouter)
 const r_login_activity = "/";

@@ -58,6 +58,53 @@ dependencies:
   # https://flutterawesome.com/a-light-weight-package-to-show-progress-dialog/
   progress_dialog: ^1.1.0+1
 
+  # 网络请求
+  #  https://github.com/flutterchina/dio
+  dio: ^3.0.9
+
+  #  轮播banner
+  #  https://pub:dev/packages/flutter_swiper
+  flutter_swiper: ^1.1.6
+
+  #  下拉刷新上拉加载
+  #https://github.com/xuelongqy/flutter_easyrefresh
+  flutter_easyrefresh: ^2.1.0
+
+  # 徽章
+  #https://github.com/yako-dev/flutter_badges
+  badges: ^1.1.0
+
+  # A library to draw fantastic charts in Flutter 图标控件
+  #https://github.com/imaNNeoFighT/fl_chart
+  fl_chart: ^0.8.3
+
+  # WebView插件 https://github.com/flutter/plugins/tree/master/packages/webview_flutter
+  webview_flutter: 0.3.19+9
+
+  # 路由框架 https://github.com/theyakka/fluro
+  fluro: ^1.6.1
+
+  #  尺寸适配
+  #https://github.com/OpenFlutter/flutter_screenutil
+  flutter_screenutil: ^1.0.2
+
+  #  The Reactive Extensions for Dart
+  #https://github.com/ReactiveX/rxdart
+  rxdart: ^0.23.1
+
+  #工具类
+  #https://github.com/Sky24n/flustars
+  flustars: ^0.2.6+1
+
+  #  状态管理
+  provider: ^4.0.4
+
+  #图片选择器
+  #https://pub.dev/packages/image_picker
+  image_picker: 0.6.3+4
+
+  cached_network_image: ^2.0.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

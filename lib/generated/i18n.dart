@@ -12,7 +12,7 @@ class S implements WidgetsLocalizations {
   const S();
 
   static const GeneratedLocalizationsDelegate delegate =
-    GeneratedLocalizationsDelegate();
+      GeneratedLocalizationsDelegate();
 
   static S of(BuildContext context) => Localizations.of<S>(context, S);
 
@@ -20,28 +20,46 @@ class S implements WidgetsLocalizations {
   TextDirection get textDirection => TextDirection.ltr;
 
   String get activity_soft_setting_login => "Logout";
-  String get activity_switch_theme_mode_dark => "Dark";
-  String get activity_switch_theme_mode_light => "Light";
-  String get app_name => "Flutter Template";
-  String get common_actions_route_message => "Message";
-  String get common_actions_route_search => "Search";
-  String get common_actions_route_serve => "Onlie Services";
-  String get label_soft_setting => "Settings";
-  String get label_switch_support_locale => "Change Language";
-  String get label_switch_theme_mode => "Themes";
-  String activity_switch_e_safety_lock_minutes(String minutes) => "***${minutes}";
-  String activity_switch_refresh_rate_milliseconds(String milliseconds) => "***${milliseconds}";
-  String activity_switch_refresh_rate_minutes(String minutes) => "***${minutes}";
-  String activity_switch_refresh_rate_seconds(String seconds) => "***${seconds}";
 
-  /// tab title 
+  String get activity_switch_theme_mode_dark => "Dark";
+
+  String get activity_switch_theme_mode_light => "Light";
+
+  String get app_name => "Flutter Template";
+
+  String get common_actions_route_message => "Message";
+
+  String get common_actions_route_search => "Search";
+
+  String get common_actions_route_serve => "Onlie Services";
+
+  String get label_soft_setting => "Settings";
+
+  String get label_switch_support_locale => "Change Language";
+
+  String get label_switch_theme_mode => "Themes";
+
+  String activity_switch_e_safety_lock_minutes(String minutes) =>
+      "***${minutes}";
+
+  String activity_switch_refresh_rate_milliseconds(String milliseconds) =>
+      "***${milliseconds}";
+
+  String activity_switch_refresh_rate_minutes(String minutes) =>
+      "***${minutes}";
+
+  String activity_switch_refresh_rate_seconds(String seconds) =>
+      "***${seconds}";
+
+  /// tab title
   String get tab_home_title => "Home";
+
   String get tab_mine_title => "Mine";
+
   String get tab_menu_title => "Moduls";
 
   /// Home Activity
   String get activity_home_title => "Home";
-
 }
 
 class $en extends S {
@@ -56,36 +74,52 @@ class $zh_CN extends S {
 
   @override
   String get label_switch_support_locale => "切换语言";
+
   @override
   String get label_soft_setting => "设置";
+
   @override
   String get label_switch_theme_mode => "设置主题";
+
   @override
   String get activity_soft_setting_login => "重新登录";
+
   @override
   String get activity_switch_theme_mode_dark => "夜间模式";
+
   @override
   String get common_actions_route_search => "搜索";
+
   @override
   String get common_actions_route_message => "消息";
+
   @override
   String get activity_switch_theme_mode_light => "白天模式";
+
   @override
   String get common_actions_route_serve => "在线客服";
+
   @override
-  String activity_switch_e_safety_lock_minutes(String minutes) => "${minutes}分钟";
+  String activity_switch_e_safety_lock_minutes(String minutes) =>
+      "${minutes}分钟";
+
   @override
-  String activity_switch_refresh_rate_milliseconds(String milliseconds) => "${milliseconds}毫秒";
+  String activity_switch_refresh_rate_milliseconds(String milliseconds) =>
+      "${milliseconds}毫秒";
+
   @override
   String activity_switch_refresh_rate_seconds(String seconds) => "${seconds}秒";
+
   @override
   String activity_switch_refresh_rate_minutes(String minutes) => "${minutes}分";
 
-  /// tab title 
+  /// tab title
   @override
   String get tab_home_title => "首页";
+
   @override
   String get tab_mine_title => "我的";
+
   @override
   String get tab_menu_title => "模块";
 
@@ -146,7 +180,7 @@ class GeneratedLocalizationsDelegate extends LocalizationsDelegate<S> {
         case "zh_CN":
           return SynchronousFuture<S>(const $zh_CN());
         default:
-          // NO-OP.
+        // NO-OP.
       }
     }
     return SynchronousFuture<S>(const S());
@@ -154,14 +188,14 @@ class GeneratedLocalizationsDelegate extends LocalizationsDelegate<S> {
 
   @override
   bool isSupported(Locale locale) =>
-    locale != null && supportedLocales.contains(locale);
+      locale != null && supportedLocales.contains(locale);
 
   @override
   bool shouldReload(GeneratedLocalizationsDelegate old) => false;
 }
 
 String getLang(Locale l) => l == null
-  ? null
-  : l.countryCode != null && l.countryCode.isEmpty
-    ? l.languageCode
-    : l.toString();
+    ? null
+    : l.countryCode != null && l.countryCode.isEmpty
+        ? l.languageCode
+        : l.toString();
