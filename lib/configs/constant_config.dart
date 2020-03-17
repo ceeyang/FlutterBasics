@@ -9,6 +9,8 @@ class KConstant {
   static const String keyAppToken = 'token';
 
   static const String keyUserModel= "user_model";
+
+  static const KeyConfig = "KConstant.KeyConfig";
 }
 
 class LoadStatus {

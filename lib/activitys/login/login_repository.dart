@@ -6,19 +6,20 @@ import 'package:flustars/flustars.dart';
 import 'package:flutter_basics/bean/user.dart';
 import 'package:flutter_basics/bean/userbean.dart';
 import 'package:flutter_basics/configs/constant_config.dart';
-import 'package:flutter_basics/http/api_utils.dart';
+import 'package:flutter_basics/http/api.dart';
 import 'package:flutter_basics/http/base_resp.dart';
 import 'package:flutter_basics/http/dio_util.dart';
 
 class LoginRepository {
   Future<UserBean> login(User userBean) async {
     BaseRespR<Map<String, dynamic>> baseResp = await DioUtil().requestR(
-        Method.post, ApiUtils.getPath(path: ApiUtils.login_url),
-        data: userBean.toJson());
+      Method.post, Api.login, data: userBean.toJson()
+    );
 
     if (baseResp.status != Constant.status_success) {
       return new Future.error(baseResp.msg);
     }
+    
     baseResp.response.headers.forEach((String name, List<String> values) {
       if (name == "set-cookie") {
         String cookie = values.toString();

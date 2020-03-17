@@ -1,5 +1,6 @@
 import 'dart:convert' as convert;
 import 'package:common_utils/common_utils.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_basics/configs/constant_config.dart';
 
 /// 输出Log工具类
@@ -86,4 +87,10 @@ class Log {
   }
 
   static String _indent([int tabCount = 1]) => '  ' * tabCount;
+}
+
+/// Prints a string representation of the object to the console.
+void print(Object object) {
+  String line = "\nPrint=========================================================$object\n=========================================================";
+  debugPrint(line);
 }

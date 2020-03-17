@@ -8,24 +8,20 @@ import 'package:flutter_basics/configs/constant_config.dart';
 
 class HanlderConfig {
 
-  // 读取 assets 文件夹中的 jsons/local_basic_config 文件
-  Future<String> _loadPersonJson() async {
-    return await rootBundle.loadString('assets/jsons/local_basic_config.json');
-  }
-
   // 将 json 字符串解析为 HanlderConfigBean 对象
-  Future<HanlderConfigBean> decodeConfigJson() async {
+  // TODO: 目前先加载本地文件，后面需要下载服务器文件，对比版本号更新替换本地文件
+  Future<HanlderConfigBean> loadLoaclConfig() async {
     // 获取本地的 json 字符串
-    String configJson = await _loadPersonJson();
+    String configJson = await rootBundle.loadString('assets/jsons/local_basic_config.json');
 
     // 解析 json 字符串，返回的是 Map<String, dynamic> 类型
     final jsonMap = json.decode(configJson);
 
     print('jsonMap runType is ${jsonMap.runtimeType}');
 
-    HanlderConfigBean person = HanlderConfigBean.fromJson(jsonMap);
+    HanlderConfigBean config = HanlderConfigBean.fromJson(jsonMap);
     
-    return person;
+    return config;
   }
 
   /// 获取 BottomNavigationbbarItem
@@ -54,7 +50,7 @@ class HanlderConfig {
   }
 
   /// 获取 BottomNavigationbbarItem 对应的 activity
-  List<Widget> getBodyPages(HanlderConfigBean config) {
+  List<Widget> getBodyPages(HanlderConfigBean config)  {
     return config.body.tabBars.map<Widget>((item){
       if (item == ConstantConfig.TabHome) {
         return HomeActivity();
@@ -73,6 +69,7 @@ class HanlderConfig {
 class HanlderConfigBean {
   String title;
   String version;
+  String date;
   HanlderConfigInfoBean info;
   HanlderConfigBodyBean body;
 
@@ -81,12 +78,14 @@ class HanlderConfigBean {
   HanlderConfigBean.fromJson(Map<String, dynamic> json) {
     title = json['title'];
     version = json['version'];
+    date = json['date'];
     info = json['info'] != null ? new HanlderConfigInfoBean.fromJson(json['info']) : null;
     body = json['body'] != null ? new HanlderConfigBodyBean.fromJson(json['body']) : null;
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['date'] = this.date;
     data['title'] = this.title;
     data['version'] = this.version;
     if (this.info != null) {
