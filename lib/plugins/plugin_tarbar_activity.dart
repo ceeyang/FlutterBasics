@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_basics/activitys/home/home_activity.dart';
 import 'package:flutter_basics/activitys/mine/mine_activity.dart';
-import 'package:flutter_basics/activitys/modul/moduls_activity.dart';
-import 'package:flutter_basics/generated/i18n.dart';
+import 'package:flutter_basics/hanlder/hanlder_config.dart';
 
 class PluginTabarActivity extends StatefulWidget {
   PluginTabarActivity({Key key}) : super(key: key);
@@ -12,17 +11,32 @@ class PluginTabarActivity extends StatefulWidget {
 }
 
 class _PluginTabarActivityState extends State<PluginTabarActivity> {
-  List<Widget> pages = List<Widget>();
+  
   int _currentIndex = 0;
+
+  List<Widget> pages = [
+    HomeActivity(),
+    MineActivity()
+  ];
+  List<BottomNavigationBarItem> items = [
+    BottomNavigationBarItem(icon: Icon(Icons.home),title: Text("首页")),
+    BottomNavigationBarItem(icon: Icon(Icons.person),title: Text("我的"))
+  ];
 
   @override
   void initState() {
     super.initState();
-
-    pages
-      ..add(HomeActivity())
-      ..add(ModulsActivity())
-      ..add(MineActivity());
+    
+    /// 异步读取 json 文件并加载
+    HanlderConfig().decodeConfigJson().then((config){
+      pages = HanlderConfig().getBodyPages(config);
+      items = HanlderConfig().getTabbarItems(config);
+      
+      /// 加载完成后需要手动变更状态才能刷新页面
+      setState(() {
+        _currentIndex = 0;
+      });
+    });
   }
 
   void _onItemTapped(int index) {
@@ -38,11 +52,7 @@ class _PluginTabarActivityState extends State<PluginTabarActivity> {
       body: pages[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home),title: Text(S.of(context).tab_home_title)),
-          BottomNavigationBarItem(icon: Icon(Icons.menu),title: Text(S.of(context).tab_menu_title)),
-          BottomNavigationBarItem(icon: Icon(Icons.person),title: Text(S.of(context).tab_mine_title)),
-        ],
+        items: items,
         selectedItemColor: Theme.of(context).selectedRowColor,
         unselectedItemColor: Theme.of(context).unselectedWidgetColor,
         currentIndex: _currentIndex,

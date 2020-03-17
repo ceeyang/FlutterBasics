@@ -26,3 +26,10 @@ class Constant {
   static const int status_not_found = 404;
   static const int status_fail = 500;
 }
+
+/// 配置文件字符串常量
+class ConstantConfig {
+  static const String TabHome = "Tab_Home";
+  static const String TabMenu = "Tab_Menu";
+  static const String TabMine = "Tab_Mine";
+}
