@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_basics/configs/app_status_holder.dart';
+import 'package:flutter_basics/configs/constant_config.dart';
 
 /// 获取图片路径(中转,用于多环境等情况) [PlatformAssetBundle] 类查看资源获取逻辑
 ///
@@ -58,4 +59,13 @@ BoxDecoration decoration_bg_color_bottom_divider_1(BuildContext ctx) => BoxDecor
 /// 随机颜色
 Color randomColor() {
   return Color.fromARGB(Random().nextInt(256)+0, Random().nextInt(256)+0, Random().nextInt(256)+0, Random().nextInt(256)+0);
+}
+
+/// Prints a string representation of the object to the console.
+void log(Object object) {
+  if ( Constant.inProduction == true ) { return; }
+  String line = "$object";
+  print("\n[Log Start------------------------------------- Custom Log ----------------------------------------------]");
+  print(line);
+  print("[-------------------------------------------------------------------------------------------------End Log]\n");
 }

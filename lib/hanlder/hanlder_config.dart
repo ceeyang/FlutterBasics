@@ -5,6 +5,7 @@ import 'package:flutter_basics/activitys/home/home_activity.dart';
 import 'package:flutter_basics/activitys/mine/mine_activity.dart';
 import 'package:flutter_basics/activitys/modul/moduls_activity.dart';
 import 'package:flutter_basics/configs/constant_config.dart';
+import 'package:flutter_basics/utils/custom_utils.dart';
 
 class HanlderConfig {
 
@@ -13,7 +14,7 @@ class HanlderConfig {
   Future<HanlderConfigBean> loadLoaclConfig() async {
     // 获取本地的 json 字符串
     String configJson = await rootBundle.loadString('assets/jsons/local_basic_config.json');
-
+    log(configJson);
     // 解析 json 字符串，返回的是 Map<String, dynamic> 类型
     final jsonMap = json.decode(configJson);
 
