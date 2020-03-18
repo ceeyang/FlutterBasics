@@ -11,6 +11,9 @@ class KConstant {
   static const String keyUserModel= "user_model";
 
   static const KeyConfig = "KConstant.KeyConfig";
+
+  /// 登录状态
+  static const keyIsLogined = "KConstant.keyIsLogined";
 }
 
 class LoadStatus {

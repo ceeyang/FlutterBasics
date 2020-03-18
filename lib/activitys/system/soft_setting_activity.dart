@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_basics/activitys/login/login_activity.dart';
-import 'package:flutter_basics/configs/app_locale_config.dart';
 import 'package:flutter_basics/configs/app_status_holder.dart';
 import 'package:flutter_basics/configs/const_value_key.dart';
 import 'package:flutter_basics/generated/i18n.dart';
@@ -11,7 +10,6 @@ import 'package:flutter_basics/common_widgets/line_menu_view.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 import 'switch_support_locale_activity.dart';
-import 'switch_theme_mode_activity.dart';
 
 /// 软件设置界面,设置软件信息,修改变量值等
 class SoftSettingActivity extends StatefulWidget {
@@ -23,8 +21,7 @@ class _State extends State<SoftSettingActivity> {
 
   /// 界面中元素信息
   List<Pair<String, String>> get _menuRoutes => [
-        Pair(SS.label_switch_theme_mode, r_switch_theme_mode_activity),
-        Pair(SS.label_switch_support_locale, r_switch_support_locale_activity),
+        Pair("设置主题", r_switch_theme_mode_activity),
       ];
 
   @override
@@ -34,20 +31,12 @@ class _State extends State<SoftSettingActivity> {
 
   @override
   Widget build(BuildContext context) {
-    // 系统语言改变时,如果当前为跟随系统,则需要修改字符串读取对象
-    if (gCurrentSupportLocale == 0) {
-      print("当前系统语言为:${Localizations.localeOf(context)}");
-      ss[0] = S.of(context);
-      print(ss);
-    }
-
     return Scaffold(
       appBar: CustomAppBar(
         title: S.of(context).label_soft_setting,
       ),
       body: ListView(
         children: <Widget>[
-          getItem(index: 0, briefText: mapThemeMode[ThemeModes.values[gCurrentThemeIndex]], marginTop: true),
           getItem(index: 1, briefText: mapSupportLocale[SupportLocale.values[gCurrentSupportLocale]], marginTop: true),
           Container(
             margin: EdgeInsets.only(top: 10, bottom: 32),

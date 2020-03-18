@@ -1,6 +1,9 @@
 /// 接口列表
 class Api {
 
+  /// 基础 URl 地址
+  static const baseUrl = "http://xfyhpc.xft119.com:9005/";
+
   /// H5地址
   static H5aApi h5;
 

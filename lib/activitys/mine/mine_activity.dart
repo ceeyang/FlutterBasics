@@ -14,7 +14,7 @@ class _MineActivityState extends State<MineActivity> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(SS.tab_mine_title),
+        title: Text("我的"),
         actions: <Widget>[
           IconButton(icon: Icon(Icons.settings), onPressed: (){
             Route route = MaterialPageRoute(builder: (context) => SoftSettingActivity());

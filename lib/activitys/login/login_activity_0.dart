@@ -68,7 +68,6 @@ class _LoginActivityState extends State<LoginActivity> {
                     pr.show();
                     Future.delayed(Duration(seconds: 2)).then((value) {
                       pr.hide().whenComplete(() {
-                        print("当前系统语言为:${Localizations.localeOf(context)}");
                         Route newRoute = MaterialPageRoute(
                             builder: (context) => PluginTabarActivity());
                         Navigator.pushReplacement(context, newRoute);

@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_basics/activitys/home/home_activity.dart';
 import 'package:flutter_basics/activitys/system/soft_setting_activity.dart';
 import 'package:flutter_basics/activitys/system/switch_support_locale_activity.dart';
-import 'package:flutter_basics/activitys/system/switch_theme_mode_activity.dart';
 import 'package:flutter_basics/activitys/login/login_activity.dart';
 
 /// 当前的所有的Activity (仿 ARouter)
@@ -21,5 +20,4 @@ final Map<String, WidgetBuilder> gActivityRoutes = {
   r_home_activity: (ctx) => HomeActivity(),
   r_default_activity: (ctx) => SoftSettingActivity(),
   r_switch_support_locale_activity: (ctx) => SwitchSupportLocaleActivity(),
-  r_switch_theme_mode_activity: (ctx) => SwitchThemeModeActivity(),
 };

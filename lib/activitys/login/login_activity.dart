@@ -26,6 +26,9 @@ class _LoginActivityState extends State<LoginActivity> {
   LoginRepository loginRepository = new LoginRepository();
   final RoundedLoadingButtonController _btnController =
       new RoundedLoadingButtonController();
+  
+  FocusNode _passwordFN = new FocusNode();
+
   bool _isClick = false;
 
   String username;
@@ -62,7 +65,6 @@ class _LoginActivityState extends State<LoginActivity> {
       req.code = username;
       req.password = password;
       loginRepository.login(req).then((UserBean model) {
-        LogUtil.v("LoginResp: ${model.toString()}");
         Route newRoute =
             MaterialPageRoute(builder: (context) => PluginTabarActivity());
         Navigator.pushReplacement(context, newRoute);
@@ -72,67 +74,104 @@ class _LoginActivityState extends State<LoginActivity> {
     }
   }
 
+  /// 账号按钮点击事件
+  void _accountTextFieldChanged(String str) {
+    print(str);
+  }
+
+  /// 密码改变事件
+  void _passwordTextFieldChanged(String str) {
+
+  }
+
+  void _accountTextFiledSubmit(String str) {
+    _passwordFN.requestFocus();
+  }
+
+  void _passwordTextFiledSubmit(String str) {
+
+  }
+
+  _loginItem(bool isAccount) {
+    var textField = TextField(
+      textInputAction: isAccount ? TextInputAction.next : TextInputAction.done,
+      obscureText: isAccount ? false : true,
+      focusNode: isAccount ? null : _passwordFN,
+      decoration: InputDecoration(
+        contentPadding: EdgeInsets.all(10.0),
+        icon: Icon(isAccount ? Icons.account_circle : Icons.lock),
+        labelText: isAccount ? '请输入你的账号' : '请输入你的密码',
+        helperText: isAccount ? '账号/邮箱/手机号' : '6~18位数字字母组合',
+      ),
+      onChanged: isAccount ? _accountTextFieldChanged : _passwordTextFieldChanged,
+      autofocus: false,
+      onSubmitted: isAccount ? _accountTextFiledSubmit : _passwordTextFiledSubmit,
+      controller: isAccount ? _controllerName : _controllerPwd,
+    );
+    return Container(
+      padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+      child: textField
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage("assets/images/template_background_image.png"),
-            fit: BoxFit.cover,
+      body: GestureDetector(
+        behavior: HitTestBehavior.translucent,
+        onTap: () {
+          // 触摸收起键盘
+          FocusScope.of(context).requestFocus(FocusNode());
+        },
+        child: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("assets/images/template_background_image.png"),
+              fit: BoxFit.cover,
+            ),
           ),
-        ),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              LoginItem(
-                controller: _controllerName,
-                prefixIcon: Icons.person,
-//                hintText: IntlUtil.getString(context, CommonStrings.user_name),
-              ),
-              Gaps.vGap15,
-              LoginItem(
-                controller: _controllerPwd,
-                prefixIcon: Icons.lock,
-                hasSuffixIcon: true,
-//                hintText: IntlUtil.getString(context, CommonStrings.user_pwd),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              IconButton(
-                icon: Icon(Icons.android),
-                color: Colors.white,
-                onPressed: () {
-                  _userLogin();
-                },
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              FlatButton(
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                _loginItem(true),
+                Gaps.vGap15,
+                _loginItem(false),
+                SizedBox(
+                  height: 20,
+                ),
+                IconButton(
+                  icon: Icon(Icons.android),
+                  color: Colors.white,
                   onPressed: () {
-                    pr = new ProgressDialog(context,
-                        type: ProgressDialogType.Normal,
-                        isDismissible: true,
-                        showLogs: true);
-                    pr.style(message: "logging in . . .");
-                    pr.show();
-                    Future.delayed(Duration(seconds: 2)).then((value) {
-                      pr.hide().whenComplete(() {
-                        print("当前系统语言为:${Localizations.localeOf(context)}");
-                        Route newRoute = MaterialPageRoute(
-                            builder: (context) => PluginTabarActivity());
-                        Navigator.pushReplacement(context, newRoute);
-                      });
-                    });
+                    _userLogin();
                   },
-                  child: Text(
-                    "Login",
-                    style: TextStyle(color: Colors.white),
-                  )),
-            ],
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                FlatButton(
+                    onPressed: () {
+                      pr = new ProgressDialog(context,
+                          type: ProgressDialogType.Normal,
+                          isDismissible: true,
+                          showLogs: true);
+                      pr.style(message: "logging in . . .");
+                      pr.show();
+                      Future.delayed(Duration(seconds: 2)).then((value) {
+                        pr.hide().whenComplete(() {
+                          Route newRoute = MaterialPageRoute(
+                              builder: (context) => PluginTabarActivity());
+                          Navigator.pushReplacement(context, newRoute);
+                        });
+                      });
+                    },
+                    child: Text(
+                      "Login",
+                      style: TextStyle(color: Colors.white),
+                    )),
+              ],
+            ),
           ),
         ),
       ),
