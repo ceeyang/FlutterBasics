@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2020-03-16 18:44:23
+ * @LastEditTime: 2020-03-17 18:55:52
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /FlutterBasics/lib/bean/user.dart
+ */
 class User {
   String id; //	编号
   String name; //	名称

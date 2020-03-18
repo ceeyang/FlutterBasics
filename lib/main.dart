@@ -48,6 +48,7 @@ class _CustomAppState extends State<CustomApp> {
         gCurrentSupportLocale = it.currentSupportLocale;
       });
     });
+    
     _init();
   }
 

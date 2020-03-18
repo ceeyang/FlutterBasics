@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
@@ -54,3 +55,7 @@ BoxDecoration decoration_bg_color_bottom_divider_1(BuildContext ctx) => BoxDecor
       ),
     );
 
+/// 随机颜色
+Color randomColor() {
+  return Color.fromARGB(Random().nextInt(256)+0, Random().nextInt(256)+0, Random().nextInt(256)+0, Random().nextInt(256)+0);
+}

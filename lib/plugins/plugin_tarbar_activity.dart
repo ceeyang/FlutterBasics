@@ -29,7 +29,7 @@ class _PluginTabarActivityState extends State<PluginTabarActivity> {
     
     /// 异步读取 json 文件并加载
     HanlderConfig().loadLoaclConfig().then((config){
-      print(config);
+      
       pages = HanlderConfig().getBodyPages(config);
       items = HanlderConfig().getTabbarItems(config);
       
