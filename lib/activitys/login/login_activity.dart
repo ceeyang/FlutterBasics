@@ -4,12 +4,13 @@ import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_basics/bean/user.dart';
 import 'package:flutter_basics/bean/userbean.dart';
-import 'package:flutter_basics/common_widgets/login_item.dart';
 import 'package:flutter_basics/activitys/login/login_repository.dart';
+import 'package:flutter_basics/configs/constant_config.dart';
 import 'package:flutter_basics/plugins/plugin_tarbar_activity.dart';
 import 'package:flutter_basics/res/resouce.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 ProgressDialog pr;
 
@@ -114,6 +115,26 @@ class _LoginActivityState extends State<LoginActivity> {
     );
   }
 
+  /// 登录
+  void _loginBtnOnPressed() {
+    pr = new ProgressDialog(context,
+        type: ProgressDialogType.Normal,
+        isDismissible: true,
+        showLogs: true);
+    pr.style(message: "logging in . . .");
+    pr.show();
+    Future.delayed(Duration(seconds: 2)).then((value) {
+      pr.hide().whenComplete(() {
+        SharedPreferences.getInstance().then((it){
+          it.setBool(KConstant.keyIsLogined, true);
+        });
+        Route newRoute = MaterialPageRoute(
+            builder: (context) => PluginTabarActivity());
+        Navigator.pushReplacement(context, newRoute);
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -151,21 +172,7 @@ class _LoginActivityState extends State<LoginActivity> {
                   height: 20,
                 ),
                 FlatButton(
-                    onPressed: () {
-                      pr = new ProgressDialog(context,
-                          type: ProgressDialogType.Normal,
-                          isDismissible: true,
-                          showLogs: true);
-                      pr.style(message: "logging in . . .");
-                      pr.show();
-                      Future.delayed(Duration(seconds: 2)).then((value) {
-                        pr.hide().whenComplete(() {
-                          Route newRoute = MaterialPageRoute(
-                              builder: (context) => PluginTabarActivity());
-                          Navigator.pushReplacement(context, newRoute);
-                        });
-                      });
-                    },
+                    onPressed: _loginBtnOnPressed,
                     child: Text(
                       "Login",
                       style: TextStyle(color: Colors.white),

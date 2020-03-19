@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_basics/activitys/system/soft_setting_activity.dart';
-import 'package:flutter_basics/configs/app_locale_config.dart';
 
 class MineActivity extends StatefulWidget {
   MineActivity({Key key}) : super(key: key);

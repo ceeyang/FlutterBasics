@@ -105,6 +105,10 @@ dependencies:
 
   cached_network_image: ^2.0.0
 
+  # Page loading placeholder
+  # https://github.com/hnvn/flutter_shimmer
+  shimmer: ^1.0.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

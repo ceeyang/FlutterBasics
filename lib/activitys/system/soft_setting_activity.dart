@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_basics/activitys/login/login_activity.dart';
 import 'package:flutter_basics/configs/app_status_holder.dart';
 import 'package:flutter_basics/configs/const_value_key.dart';
-import 'package:flutter_basics/generated/i18n.dart';
 import 'package:flutter_basics/plugins/plugin_page_routes.dart';
 import 'package:flutter_basics/utils/support_models.dart';
 import 'package:flutter_basics/common_widgets/custom_app_bar.dart';
 import 'package:flutter_basics/common_widgets/line_menu_view.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
-import 'switch_support_locale_activity.dart';
+import 'switch_theme_mode_activity.dart';
 
 /// 软件设置界面,设置软件信息,修改变量值等
 class SoftSettingActivity extends StatefulWidget {
@@ -33,16 +32,16 @@ class _State extends State<SoftSettingActivity> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        title: S.of(context).label_soft_setting,
+        title: "设置"
       ),
       body: ListView(
         children: <Widget>[
-          getItem(index: 1, briefText: mapSupportLocale[SupportLocale.values[gCurrentSupportLocale]], marginTop: true),
+          getItem(index: 0, briefText: mapThemeMode[ThemeMode.values[gCurrentThemeIndex]], marginTop: true),
           Container(
             margin: EdgeInsets.only(top: 10, bottom: 32),
             child: RaisedButton(
               child: Text(
-                S.of(context).activity_soft_setting_login,
+                "退出登录",
                 style: Theme.of(context).textTheme.button,
               ),
               onPressed: () {
@@ -106,7 +105,7 @@ class _State extends State<SoftSettingActivity> {
           ),
         ),
         initListener: LmvListener(onPerformSelf: () {
-          var target = _menuRoutes[index].second;
+          var target = _menuRoutes[index].first;
           if (target != null && target != "/") {
             // 跳转路由 ( 将所有参数都进行传递,用户根据需要来读取对应参数值)
             Navigator.pushNamed(context, target, arguments: {

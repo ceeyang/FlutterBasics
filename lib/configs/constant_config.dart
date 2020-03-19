@@ -37,4 +37,5 @@ class ConstantConfig {
   static const String TabHome = "Tab_Home";
   static const String TabMenu = "Tab_Menu";
   static const String TabMine = "Tab_Mine";
+  static const String TabConfig = "TAB_CONFIG";
 }

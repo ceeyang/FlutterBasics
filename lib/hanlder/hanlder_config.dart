@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_basics/activitys/configurable/configurable_activity.dart';
 import 'package:flutter_basics/activitys/home/home_activity.dart';
 import 'package:flutter_basics/activitys/mine/mine_activity.dart';
 import 'package:flutter_basics/activitys/modul/moduls_activity.dart';
@@ -57,7 +58,7 @@ class HanlderConfig {
         return HomeActivity();
       }
       if (item == ConstantConfig.TabMenu) {
-        return ModulsActivity();
+        return ConfigurableActivity();
       }
       if (item == ConstantConfig.TabMine) {
         return MineActivity();

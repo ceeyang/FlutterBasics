@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dio/dio.dart';
 import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
@@ -53,7 +51,6 @@ class _CustomAppState extends State<CustomApp> {
         gCurrentThemeIndex = it.getInt(KEY_THEME_MODE) ?? 0;
         gCurrentSupportLocale = it.getInt(KEY_SUPPORT_LOCALE) ?? 0;
       });
-      log(_hasLogin ? "true" : "false");
     });
 
     // 当通知系统时,刷新一下状态(换肤/切换语言/涨跌颜色)
@@ -98,6 +95,10 @@ class _CustomAppState extends State<CustomApp> {
 /// 程序入口,默认native执行 /lib/main.dart 文件
 /// void main() => runApp(CustomApp());
 void main() async{
+
+  SharedPreferences.getInstance().then((it){
+
+  });
 
   runApp(CustomApp());
 }
