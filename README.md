@@ -1,3 +1,11 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-03-18 15:28:24
+ * @LastEditTime: 2020-03-20 10:09:48
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: /FlutterBasics/README.md
+ -->
 # flutter_basics
 
 A new Flutter project.
@@ -21,6 +29,11 @@ A new Flutter project.
        void main() => runApp(CustomApp(config: (){
           print("config------------------");
        }));
+
+## 关于 JSON 
+    推荐使用以下两个工具 
+    - https://www.json.cn/  JSON格式化
+    - https://javiercbk.github.io/json_to_dart/  JSON 转 Dart 模型
 
 
 ## Getting Started

@@ -1,18 +1,31 @@
 {
-    "title": "消安科技项目本地配置文件",
-    "version": "0.0.1",
-    "date": "20200317",
-    "info": {
-        "name": "三维应急预案项目",
-        "company": "深圳市消安科技有限公司",
-        "domain": "https://www.ceeyang.com"
+    "title":"消安科技项目本地配置文件",
+    "version":"0.0.1",
+    "date":"20200317",
+    "info":{
+        "name":"三维应急预案项目",
+        "company":"深圳市消安科技有限公司",
+        "domain":"https://www.ceeyang.com"
     },
-    "body": {
-        "tabBars": [
-            "Tab_Home",
-            "Tab_Menu",
-            "Tab_Mine"
+    "body":{
+        "tabBars":[
+            {
+                "title":"首页",
+                "icon":"home",
+                "route":"/home_activity"
+            },
+            {
+                "title":"模块",
+                "icon":"menu",
+                "route":"/configurable_activity"
+            },
+            {
+                "title":"我的",
+                "icon":"person",
+                "route":"/mine_activity",
+                "params":"alafa"
+            }
         ],
-        "description": "tabBars: 首页底部 tab, 内容需要按照 ConstantConfig 里面的值对应, 并且每个值必须有对应的 Activity, 即一个值对应一个 tab 模块"
+        "description":"tabBars: 首页底部 tab, 内容需要按照 ConstantConfig 里面的值对应, 并且每个值必须有对应的 Activity, 即一个值对应一个 tab 模块"
     }
 }

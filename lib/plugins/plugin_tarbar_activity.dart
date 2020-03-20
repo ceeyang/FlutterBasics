@@ -28,16 +28,13 @@ class _PluginTabarActivityState extends State<PluginTabarActivity> {
   void initState() {
     super.initState();
     
-    log("异步读取 json 文件并加载");
     /// 异步读取 json 文件并加载
     HanlderConfig().loadLoaclConfig().then((config){
       
-      log(config);
-
-      pages = HanlderConfig().getBodyPages(config);
-      items = HanlderConfig().getTabbarItems(config);
+      HanlderConfigResult result = HanlderConfig().getTabBarItemAndPages(config);
+      pages = result.widgets;
+      items = result.items;
       
-      log(pages);
       /// 加载完成后需要调用 setState 变更状态才能刷新页面
       setState(() {
         _currentIndex = 0;

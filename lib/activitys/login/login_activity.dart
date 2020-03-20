@@ -162,7 +162,7 @@ class _LoginActivityState extends State<LoginActivity> {
                   height: 20,
                 ),
                 IconButton(
-                  icon: Icon(Icons.android),
+                  icon: Icon(Icons.web),
                   color: Colors.white,
                   onPressed: () {
                     _userLogin();
