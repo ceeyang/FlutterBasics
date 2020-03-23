@@ -6,6 +6,7 @@ import 'package:flutter_basics/activitys/login/login_activity.dart';
 import 'package:flutter_basics/bean/user.dart';
 import 'package:flutter_basics/configs/constant_config.dart';
 import 'package:flutter_basics/http/dio_util.dart';
+import 'package:flutter_basics/plugins/plugin_page_routes.dart';
 import 'package:flutter_basics/plugins/plugin_tarbar_activity.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -75,7 +76,10 @@ class _CustomAppState extends State<CustomApp> {
       title: 'Flutter Basics',
       debugShowCheckedModeBanner: false,
       theme: themes[gCurrentThemeIndex],
+      /// 如果指定 home 作为程序主入口, 那么将不能使用 routes 属性
+      /// 并且 不能使用 Navigator.pushNamed(context, routeName);
       home: _hasLogin ? PluginTabarActivity() : LoginActivity(), 
+      ///routes: gActivityRoutes,
       localizationsDelegates: [
         CupertinoLocalizationsDelegate(),
         GlobalMaterialLocalizations.delegate, //Material 组件库所使用的字符串

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_basics/activitys/login/login_activity.dart';
 import 'package:flutter_basics/configs/app_status_holder.dart';
 import 'package:flutter_basics/configs/const_value_key.dart';
-import 'package:flutter_basics/plugins/plugin_page_routes.dart';
 import 'package:flutter_basics/utils/support_models.dart';
 import 'package:flutter_basics/common_widgets/custom_app_bar.dart';
 import 'package:flutter_basics/common_widgets/line_menu_view.dart';
@@ -18,10 +17,12 @@ class SoftSettingActivity extends StatefulWidget {
 
 class _State extends State<SoftSettingActivity> {
 
+  List _appThemes = [ThemeModes.LIGHT, ThemeModes.DARK];
+
   /// 界面中元素信息
-  List<Pair<String, String>> get _menuRoutes => [
-        Pair("设置主题", r_switch_theme_mode_activity),
-      ];
+  List<Pair<String, Widget>> get _menuRoutes => [
+    Pair("设置主题", SwitchThemeModeActivity()),
+  ];
 
   @override
   void initState() {
@@ -36,7 +37,7 @@ class _State extends State<SoftSettingActivity> {
       ),
       body: ListView(
         children: <Widget>[
-          getItem(index: 0, briefText: mapThemeMode[ThemeMode.values[gCurrentThemeIndex]], marginTop: true),
+          getItem(index: 0, briefText: mapThemeMode[_appThemes[gCurrentThemeIndex]], marginTop: true),
           Container(
             margin: EdgeInsets.only(top: 10, bottom: 32),
             child: RaisedButton(
@@ -106,16 +107,9 @@ class _State extends State<SoftSettingActivity> {
         ),
         initListener: LmvListener(onPerformSelf: () {
           var target = _menuRoutes[index].first;
-          if (target != null && target != "/") {
+          if (target != null) {
             // 跳转路由 ( 将所有参数都进行传递,用户根据需要来读取对应参数值)
-            Navigator.pushNamed(context, target, arguments: {
-              // ...
-            }).then((it) {
-              // 需要重新刷新状态
-              if (it == true) {
-                // ...
-              }
-            });
+            Navigator.push(context, MaterialPageRoute(builder: (context) => SwitchThemeModeActivity()));
           }
         }),
       ),

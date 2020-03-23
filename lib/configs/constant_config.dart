@@ -39,3 +39,10 @@ class ConstantConfig {
   static const String TabMine = "Tab_Mine";
   static const String TabConfig = "TAB_CONFIG";
 }
+
+class LayoutConstant {
+
+  static const default_margin = 10.0;
+  
+  static const default_section = 20;
+}

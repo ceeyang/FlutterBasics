@@ -14,6 +14,10 @@ class PluginTabarActivity extends StatefulWidget {
 class _PluginTabarActivityState extends State<PluginTabarActivity> {
   
   int _currentIndex = 0;
+  var _pageController = PageController(
+    initialPage: 0,
+    keepPage: true
+  );
 
   List<Widget> pages = [
     HomeActivity(),
@@ -42,17 +46,38 @@ class _PluginTabarActivityState extends State<PluginTabarActivity> {
     });
   }
 
+  /// tabbar 点击事件
   void _onItemTapped(int index) {
     setState(() {
       _currentIndex = index;
+      _pageController.animateToPage(index, duration: Duration(milliseconds: 500), curve: Curves.ease);
     });
+  }
+
+  /// 页面滚动事件
+  void _pageChanged(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
+  }
+
+  /// 创建 body
+  Widget _pageViewBuilder() {
+    return PageView.builder(
+      controller: _pageController,
+      onPageChanged: _pageChanged,
+      //回调函数
+      itemCount: pages.length,
+      itemBuilder: (context, index) => pages[index],
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return
       Scaffold(
-      body: pages[_currentIndex],
+      //body: pages[_currentIndex],
+      body: _pageViewBuilder(),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         items: items,
@@ -60,7 +85,7 @@ class _PluginTabarActivityState extends State<PluginTabarActivity> {
         unselectedItemColor: Theme.of(context).unselectedWidgetColor,
         currentIndex: _currentIndex,
         onTap: _onItemTapped,
-      )
+      ),
     );
   }
 }

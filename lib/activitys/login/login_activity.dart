@@ -66,8 +66,7 @@ class _LoginActivityState extends State<LoginActivity> {
       req.code = username;
       req.password = password;
       loginRepository.login(req).then((UserBean model) {
-        Route newRoute =
-            MaterialPageRoute(builder: (context) => PluginTabarActivity());
+        Route newRoute = MaterialPageRoute(builder: (context) => PluginTabarActivity());
         Navigator.pushReplacement(context, newRoute);
       }).catchError((error) {
         LogUtil.e("LoginResp error: ${error.toString()}");
@@ -128,9 +127,8 @@ class _LoginActivityState extends State<LoginActivity> {
         SharedPreferences.getInstance().then((it){
           it.setBool(KConstant.keyIsLogined, true);
         });
-        Route newRoute = MaterialPageRoute(
-            builder: (context) => PluginTabarActivity());
-        Navigator.pushReplacement(context, newRoute);
+        Route newRoute = MaterialPageRoute(builder: (context) => PluginTabarActivity());
+        Navigator.pushAndRemoveUntil(context, newRoute, (route) => route == null);
       });
     });
   }
