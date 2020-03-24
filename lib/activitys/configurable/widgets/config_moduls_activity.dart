@@ -75,13 +75,13 @@ class CardModulsParams {
   /// 每行多少个 默认 5个/行
   int numberOfRow;
   /// item 模型
-  ModulActivity modul;
+  List<ModulActivity> moduls;
 
   CardModulsParams({
     this.text,
     this.menuTextSize,
     this.numberOfRow,
-    this.modul
+    this.moduls
   });
 }
 
@@ -101,8 +101,17 @@ class CardModulsActivity extends StatefulWidget {
 
 class _CardModulsActivityState extends State<CardModulsActivity> {
   
-  Widget modulBuild(CardModulsParams item) {
-
+  List<Widget> modulBuild(CardModulsParams params) {
+    Widget header = params.text == null || params.text.isEmpty ? null : Text(params.text, style: TextStyle(fontSize: 18),);
+    List<Widget> items = [];
+    int numberOfRow = params.numberOfRow;
+    for (var item in params.moduls) {
+      
+    }
+    if (header != null) {
+      items.insert(0, header);
+    }
+    return items;
   }
   
   @override

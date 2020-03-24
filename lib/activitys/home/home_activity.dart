@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_basics/activitys/mine/message_activity.dart';
 import 'package:flutter_basics/activitys/mine/mine_drawer_activity.dart';
 
 class HomeActivity extends StatefulWidget {
@@ -16,7 +17,7 @@ class _HomeActivityState extends State<HomeActivity> {
 
   }
 
-  Widget profileAvatar(BuildContext context) {
+  Widget profileAvatar() {
     return Row(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -24,12 +25,10 @@ class _HomeActivityState extends State<HomeActivity> {
           SizedBox(width: 10),
           InkWell(
             onTap: () {
-              print("object");
-              Scaffold.of(context).openDrawer();
+              _scaffoldKey.currentState.openDrawer();
             },
             child: CircleAvatar(
               backgroundImage: NetworkImage("https://randomuser.me/api/portraits/women/82.jpg"),
-              radius: 20,
             ),
           )
         ],
@@ -43,20 +42,10 @@ class _HomeActivityState extends State<HomeActivity> {
       appBar: AppBar(
         brightness: Brightness.light,
         elevation: 10,
-        leading: Row(
-          children: <Widget>[
-            SizedBox(width: 10),
-            InkWell(
-              onTap:() => _scaffoldKey.currentState.openDrawer(),
-              child: CircleAvatar(
-                backgroundImage: NetworkImage("https://randomuser.me/api/portraits/women/82.jpg"),  
-              ),
-            ),
-          ],
-        ),
+        leading: profileAvatar(),
         actions: <Widget>[
           IconButton(icon: Icon(Icons.message), onPressed: (){
-            
+            Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) => MessageActivity()));
           })
         ],
       ),
