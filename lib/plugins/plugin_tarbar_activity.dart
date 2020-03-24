@@ -69,6 +69,7 @@ class _PluginTabarActivityState extends State<PluginTabarActivity> {
       //回调函数
       itemCount: pages.length,
       itemBuilder: (context, index) => pages[index],
+      physics: NeverScrollableScrollPhysics(),
     );
   }
 
@@ -76,13 +77,10 @@ class _PluginTabarActivityState extends State<PluginTabarActivity> {
   Widget build(BuildContext context) {
     return
       Scaffold(
-      //body: pages[_currentIndex],
       body: _pageViewBuilder(),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         items: items,
-        selectedItemColor: Theme.of(context).selectedRowColor,
-        unselectedItemColor: Theme.of(context).unselectedWidgetColor,
         currentIndex: _currentIndex,
         onTap: _onItemTapped,
       ),

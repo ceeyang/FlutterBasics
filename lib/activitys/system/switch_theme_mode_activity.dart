@@ -69,8 +69,6 @@ class _State extends State<SwitchThemeModeActivity> {
     eventBus.fire(SystemThemeSwitch(currentThemeIndex: news.index));
     setState(() {});
 
-    print(mapThemeMode);
-
     return true;
   }
 }

@@ -1,6 +1,7 @@
 // 主题配置类
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 /// 配置项目中可能用到的主题颜色等内容
 /// 默认首先显示的系统样式为 0 位置
@@ -9,7 +10,7 @@ List<ThemeData> themes = [
     // theme : light 模式
     scaffoldBackgroundColor: Color(0xFFF4F4F4),
     accentColor: Color(0xFF8144E5),
-    primaryColor: Colors.white,
+    primaryColor: Colors.lightBlue[800],
     primaryColorDark: Colors.white,
     backgroundColor: Colors.white,
     dividerColor: Color(0x8CA9ACBF),
@@ -123,5 +124,3 @@ List<ThemeData> themes = [
     ),
   ),
 ];
-
-///记录当前被选中的主题

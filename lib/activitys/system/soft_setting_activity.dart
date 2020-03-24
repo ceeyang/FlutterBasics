@@ -109,7 +109,7 @@ class _State extends State<SoftSettingActivity> {
           var target = _menuRoutes[index].first;
           if (target != null) {
             // 跳转路由 ( 将所有参数都进行传递,用户根据需要来读取对应参数值)
-            Navigator.push(context, MaterialPageRoute(builder: (context) => SwitchThemeModeActivity()));
+            Navigator.push(context, MaterialPageRoute(builder: (context) => SwitchThemeModeActivity(), settings: RouteSettings(arguments: "")));
           }
         }),
       ),

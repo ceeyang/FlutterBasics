@@ -20,7 +20,7 @@ class CustomAppBar extends StatelessWidget  implements PreferredSizeWidget {
         leading: GestureDetector(
           child: Icon(
             Icons.arrow_back,
-            color: Theme.of(context).textTheme.title.color,
+            //color: Theme.of(context).textTheme.title.color,
           ),
           onTap: () {
             //  返回上一页,退栈
@@ -34,7 +34,7 @@ class CustomAppBar extends StatelessWidget  implements PreferredSizeWidget {
         centerTitle: true,
         title: Text(
           _title,
-          style: Theme.of(context).textTheme.title,
+          //style: Theme.of(context).textTheme.title,
         ),
       ),
     );

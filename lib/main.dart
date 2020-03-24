@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_basics/activitys/login/login_activity.dart';
 import 'package:flutter_basics/bean/user.dart';
@@ -59,11 +60,6 @@ class _CustomAppState extends State<CustomApp> {
       setState(() {
         // 修改皮肤
         gCurrentThemeIndex = it.currentThemeIndex;
-      });
-    });
-    eventBus.on<SupportLocaleSwitch>().listen((it) {
-      setState(() {
-        gCurrentSupportLocale = it.currentSupportLocale;
       });
     });
     
