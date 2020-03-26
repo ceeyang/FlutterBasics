@@ -36,7 +36,7 @@ final Map<String, Widget> routeMap = {
   r_switch_theme_mode_activity: SwitchThemeModeActivity(),
   r_configable_activity: ConfigurableActivity(),
   r_mine_activity: MineActivity(),
-  r_test_activity: SampleAppPage()
+  r_test_activity: TestActivity()
 };
 
 Widget getTarget(String name) {

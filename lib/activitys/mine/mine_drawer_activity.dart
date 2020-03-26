@@ -39,6 +39,7 @@ class _MineDrawerActivityState extends State<MineDrawerActivity> {
         }
 
         if (target != null && target != "") {
+          print(routeMap[target]);
           Navigator.push(context, MaterialPageRoute(builder: (context) => routeMap[target]));
         }
       },

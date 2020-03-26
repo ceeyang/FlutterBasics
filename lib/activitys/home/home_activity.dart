@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_basics/activitys/mine/message_activity.dart';
 import 'package:flutter_basics/activitys/mine/mine_drawer_activity.dart';
+import 'package:flutter_basics/common_widgets/custom_app_bar.dart';
 
 class HomeActivity extends StatefulWidget {
   HomeActivity({Key key}) : super(key: key);
@@ -35,12 +36,9 @@ class _HomeActivityState extends State<HomeActivity> {
       );
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      key: _scaffoldKey,
-      appBar: AppBar(
-        brightness: Brightness.light,
+  Widget _appBar(int type) {
+    if (type == 0) {
+      return AppBar(
         elevation: 10,
         leading: profileAvatar(),
         actions: <Widget>[
@@ -48,7 +46,19 @@ class _HomeActivityState extends State<HomeActivity> {
             Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) => MessageActivity()));
           })
         ],
-      ),
+      );
+    } else {
+      return HomeAppBar(
+        leadingWidget: profileAvatar(), 
+      );
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      key: _scaffoldKey,
+      appBar: _appBar(0),
       body: Center(
         child: Text("home", style: TextStyle(fontSize: 25)),
       ),

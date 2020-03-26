@@ -33,7 +33,7 @@ class _State extends State<SoftSettingActivity> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        title: "设置"
+        title: "设置",
       ),
       body: ListView(
         children: <Widget>[

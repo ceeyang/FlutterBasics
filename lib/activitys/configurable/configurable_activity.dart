@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_basics/activitys/configurable/widgets/config_moduls_activity.dart';
+import 'package:flutter_basics/common_widgets/custom_app_bar.dart';
 import 'package:flutter_basics/plugins/plugin_page_routes.dart';
 import 'package:flutter_basics/plugins/plugin_temp_activity.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -51,13 +52,44 @@ class _ConfigurableActivityState extends State<ConfigurableActivity> with Automa
     );
   }
 
+  Widget profileAvatar() {
+    return Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          SizedBox(width: 10),
+          InkWell(
+            onTap: () {
+              //_scaffoldKey.currentState.openDrawer();
+            },
+            child: CircleAvatar(
+              backgroundImage: NetworkImage("https://randomuser.me/api/portraits/women/82.jpg"),
+            ),
+          ),
+          SizedBox(width: 10),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text("张三", style: TextStyle(fontSize: 20, color: Colors.white),),
+              Text("18000000000", style: TextStyle(fontSize: 15, color: Colors.white),)
+            ],
+          )
+        ],
+      );
+  }
+
+  Widget _appBar() {
+    return HomeAppBar(
+      leadingWidget: profileAvatar(), 
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     super.build(context);
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Custom Config")
-      ),
+      appBar: _appBar(),
       body: _configLoaded ? _listViewBuilder(context) : PluginTempActivity(),
     );
   }
