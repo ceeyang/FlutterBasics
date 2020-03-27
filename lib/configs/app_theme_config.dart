@@ -10,7 +10,8 @@ List<ThemeData> themes = [
     // theme : light 模式
     scaffoldBackgroundColor: Color(0xFFF4F4F4),
     accentColor: Color(0xFF8144E5),
-    primaryColor: Colors.lightBlue[800],
+    //primaryColor: Colors.lightBlue[800],
+    primaryColor: Colors.white,
     primaryColorDark: Colors.white,
     backgroundColor: Colors.white,
     dividerColor: Color(0x8CA9ACBF),

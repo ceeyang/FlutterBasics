@@ -123,11 +123,15 @@ class _CustomAppBarState extends State<CustomAppBar> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Theme.of(context).primaryColor,
+      color: Colors.white,
       child: SafeArea(
         top: true,
         child: Container(
           height: widget.contentHeight,
+          decoration: UnderlineTabIndicator(
+            borderSide: BorderSide(width: 2.0, color: Color(0xF5F5F5)),
+            insets: EdgeInsets.zero
+          ),
           child: Stack(
             alignment: Alignment.center,
             children: <Widget>[
@@ -150,7 +154,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
               Container(
                 child: widget.titleWidget != null 
                   ? widget.titleWidget
-                  : Text(widget._title),
+                  : Text(widget._title, style: TextStyle(fontSize: 20),),
               ),
               Positioned(
                 right: 0,
