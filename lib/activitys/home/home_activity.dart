@@ -48,7 +48,7 @@ class _HomeActivityState extends State<HomeActivity> {
         ],
       );
     } else {
-      return HomeAppBar(
+      return CustomAppBar(
         leadingWidget: profileAvatar(), 
       );
     }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_basics/activitys/configurable/widgets/config_moduls_activity.dart';
+import 'package:flutter_basics/activitys/task/emergency_synergy_activity.dart';
 import 'package:flutter_basics/common_widgets/custom_app_bar.dart';
 import 'package:flutter_basics/plugins/plugin_page_routes.dart';
 import 'package:flutter_basics/plugins/plugin_temp_activity.dart';
@@ -80,8 +81,19 @@ class _ConfigurableActivityState extends State<ConfigurableActivity> with Automa
   }
 
   Widget _appBar() {
-    return HomeAppBar(
+
+    var route = MaterialPageRoute(builder: (BuildContext context) {
+      return EmergencySynergyActivity();
+    });
+
+    return CustomAppBar(
       leadingWidget: profileAvatar(), 
+      trailingWidget: Row(
+        children: <Widget>[
+          IconButton(icon: Icon(Icons.settings), onPressed: ()=> Navigator.of(context).push(route)),
+          IconButton(icon: Icon(Icons.settings), onPressed: ()=> Navigator.of(context).push(route)),
+        ],
+      ),
     );
   }
 

@@ -22,47 +22,38 @@ class LoginActivity extends StatefulWidget {
 }
 
 class _LoginActivityState extends State<LoginActivity> {
-  TextEditingController _controllerName = new TextEditingController();
-  TextEditingController _controllerPwd = new TextEditingController();
-  LoginRepository loginRepository = new LoginRepository();
-  final RoundedLoadingButtonController _btnController =
-      new RoundedLoadingButtonController();
-  
-  FocusNode _passwordFN = new FocusNode();
 
-  bool _isClick = false;
+  TextEditingController _controllerName, _controllerPwd;
+  LoginRepository loginRepository = LoginRepository();
+  FocusNode _passwordFN = FocusNode();
 
-  String username;
-  String password;
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
+  final _formKey = GlobalKey<FormState>();
+
+  bool _autoValidate = false;
+
+  String username, password;
+
+  String _assetsIcon = "assets/images/img_default_avatar.png";
+  String _assetsBackgroundImage = "assets/images/template_background_image.png";
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-//    _controllerName.addListener(_verify);
-//    _controllerPwd.addListener(_verify);
-  }
 
-  bool _verify() {
-    username = _controllerName.text;
-    password = _controllerPwd.text;
-    bool isClick = true;
-    if (username.isEmpty || username.length < 6) {
-//        Fluttertoast.showToast(,username.isEmpty ? "请输入用户名～" : "用户名至少6位～");
-      isClick = false;
-    }
-    if (password.isEmpty || password.length < 6) {
-//        Util.showSnackBar(context, username.isEmpty ? "请输入密码～" : "密码至少6位～");
-      isClick = false;
-    }
-    username = _controllerName.text;
-    password = _controllerPwd.text;
-    return isClick;
+    SharedPreferences.getInstance().then((it) {
+      setState(() {
+        username = it.getString(KConstant.keyUserName);
+        password = it.getString(KConstant.keyUserPassword);
+        _controllerName = TextEditingController(text: username);
+        _controllerPwd = TextEditingController(text: password);
+      });
+    });
+
   }
 
   void _userLogin() {
-    if (_verify()) {
-      User req = new User();
+    User req = new User();
       req.code = username;
       req.password = password;
       loginRepository.login(req).then((UserBean model) {
@@ -71,42 +62,90 @@ class _LoginActivityState extends State<LoginActivity> {
       }).catchError((error) {
         LogUtil.e("LoginResp error: ${error.toString()}");
       });
-    }
   }
 
   /// 账号按钮点击事件
-  void _accountTextFieldChanged(String str) {
-    print(str);
-  }
-
-  /// 密码改变事件
-  void _passwordTextFieldChanged(String str) {
-
-  }
-
-  void _accountTextFiledSubmit(String str) {
+  void _accountTextFieldSubmit(value) {
     _passwordFN.requestFocus();
   }
 
-  void _passwordTextFiledSubmit(String str) {
-
+  /// 密码改变事件
+  void _passwordTextFieldSubmit(value) {
+    _passwordFN.unfocus();
   }
 
-  _loginItem(bool isAccount) {
-    var textField = TextField(
+  String _validateAccount(value) {
+    if (value == null || value.isEmpty) {
+      return "请输入用户名";
+    }
+    return null;
+  }
+
+  String _validatePassword(value) {
+    if (value == null || value.isEmpty) {
+      return "请输入密码";
+    }
+    return null;
+  }
+
+  /// 登录
+  void _loginBtnOnPressed() {
+
+    if (_formKey.currentState.validate()) {
+      _formKey.currentState.save();
+
+      String name = _controllerName.text;
+      String psd = _controllerPwd.text;
+
+      SharedPreferences.getInstance().then((it) {
+        it.setString(KConstant.keyUserName, name);
+        it.setString(KConstant.keyUserPassword, psd);
+      });
+
+      pr = new ProgressDialog(context,
+        type: ProgressDialogType.Normal,
+        isDismissible: true,
+        showLogs: true
+      );
+      pr.style(message: "logging in . . .");
+      pr.show();
+
+      Future.delayed(Duration(seconds: 2)).then((value) {
+        pr.hide().whenComplete(() {
+          SharedPreferences.getInstance().then((it){
+            it.setBool(KConstant.keyIsLogined, true);
+          });
+          Route newRoute = MaterialPageRoute(builder: (context) => PluginTabarActivity());
+          Navigator.pushAndRemoveUntil(context, newRoute, (route) => route == null);
+        });
+      });
+
+    } else {
+      setState(() {
+        _autoValidate = true;
+      });
+    }
+  }
+
+
+  /// MARK: - View -
+
+  /// 输入框
+  Widget _loginItem(bool isAccount) {
+    var textField = TextFormField(
       textInputAction: isAccount ? TextInputAction.next : TextInputAction.done,
       obscureText: isAccount ? false : true,
       focusNode: isAccount ? null : _passwordFN,
       decoration: InputDecoration(
-        contentPadding: EdgeInsets.all(10.0),
         icon: Icon(isAccount ? Icons.account_circle : Icons.lock),
         labelText: isAccount ? '请输入你的账号' : '请输入你的密码',
-        helperText: isAccount ? '账号/邮箱/手机号' : '6~18位数字字母组合',
       ),
-      onChanged: isAccount ? _accountTextFieldChanged : _passwordTextFieldChanged,
+      onFieldSubmitted: isAccount ? _accountTextFieldSubmit : _passwordTextFieldSubmit,
       autofocus: false,
-      onSubmitted: isAccount ? _accountTextFiledSubmit : _passwordTextFiledSubmit,
       controller: isAccount ? _controllerName : _controllerPwd,
+      keyboardType: TextInputType.emailAddress,
+      validator: isAccount ? _validateAccount : _validatePassword,
+      autovalidate: _autoValidate,
     );
     return Container(
       padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
@@ -114,28 +153,10 @@ class _LoginActivityState extends State<LoginActivity> {
     );
   }
 
-  /// 登录
-  void _loginBtnOnPressed() {
-    pr = new ProgressDialog(context,
-        type: ProgressDialogType.Normal,
-        isDismissible: true,
-        showLogs: true);
-    pr.style(message: "logging in . . .");
-    pr.show();
-    Future.delayed(Duration(seconds: 2)).then((value) {
-      pr.hide().whenComplete(() {
-        SharedPreferences.getInstance().then((it){
-          it.setBool(KConstant.keyIsLogined, true);
-        });
-        Route newRoute = MaterialPageRoute(builder: (context) => PluginTabarActivity());
-        Navigator.pushAndRemoveUntil(context, newRoute, (route) => route == null);
-      });
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  /// 登录视图
+  Widget _buildLoginActivity() {
     return Scaffold(
+      key: _scaffoldKey,
       body: GestureDetector(
         behavior: HitTestBehavior.translucent,
         onTap: () {
@@ -145,36 +166,26 @@ class _LoginActivityState extends State<LoginActivity> {
         child: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage("assets/images/template_background_image.png"),
+              image: AssetImage(_assetsBackgroundImage),
               fit: BoxFit.cover,
             ),
           ),
-          child: Center(
+          child: Form(
+            key: _formKey,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
+                FadeInImage.assetNetwork(placeholder: _assetsIcon, image: _assetsIcon, width: 80, height: 80),
+                SizedBox(height: 50,),
                 _loginItem(true),
                 Gaps.vGap15,
                 _loginItem(false),
-                SizedBox(
-                  height: 20,
-                ),
+                SizedBox(height: 20,),
                 IconButton(
-                  icon: Icon(Icons.web),
-                  color: Colors.white,
-                  onPressed: () {
-                    _userLogin();
-                  },
+                  iconSize: 80,
+                  icon: Icon(Icons.keyboard_arrow_right), 
+                  onPressed: _loginBtnOnPressed
                 ),
-                SizedBox(
-                  height: 20,
-                ),
-                FlatButton(
-                    onPressed: _loginBtnOnPressed,
-                    child: Text(
-                      "Login",
-                      style: TextStyle(color: Colors.white),
-                    )),
               ],
             ),
           ),
@@ -182,5 +193,10 @@ class _LoginActivityState extends State<LoginActivity> {
       ),
       resizeToAvoidBottomInset: false, //防止软键盘弹起
     );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return _buildLoginActivity();
   }
 }

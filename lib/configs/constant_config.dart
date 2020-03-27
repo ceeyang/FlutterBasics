@@ -14,6 +14,9 @@ class KConstant {
 
   /// 登录状态
   static const keyIsLogined = "KConstant.keyIsLogined";
+
+  static const keyUserName = "KConstant.keyUserName";
+  static const keyUserPassword = "KConstant.keyUserPassword";
 }
 
 class LoadStatus {
