@@ -72,8 +72,8 @@ class _ConfigurableActivityState extends State<ConfigurableActivity> with Automa
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text("张三", style: TextStyle(fontSize: 20, color: Colors.white),),
-              Text("18000000000", style: TextStyle(fontSize: 15, color: Colors.white),)
+              Text("张三", style: TextStyle(fontSize: 20, color: Colors.black),),
+              Text("18000000000", style: TextStyle(fontSize: 15, color: Colors.black),)
             ],
           )
         ],

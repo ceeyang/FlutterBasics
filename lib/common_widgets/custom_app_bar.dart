@@ -1,71 +1,5 @@
 import 'package:flutter/material.dart';
-
-
-// /// 自定义appbar 可弹出窗口
-// class CustomAppBar extends StatelessWidget  implements PreferredSizeWidget {
-//   /// 标题
-//   final String _title;
-
-//   ///  手势,当点击返回键时,处理的逻辑,如果不传值,则默认会返回上个界面,且不包含任何返回值
-//   final void Function(BuildContext ctx) _onReturn;
-
-//   CustomAppBar({String title, Function(BuildContext ctx) onReturn})
-//       : _title = title == null ? "" : title,
-//         _onReturn = onReturn != null ? onReturn : null;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return FixHeightAppBar(
-//       child: AppBar(
-//         leading: GestureDetector(
-//           child: Icon(
-//             Icons.arrow_back,
-//             //color: Theme.of(context).textTheme.title.color,
-//           ),
-//           onTap: () {
-//             //  返回上一页,退栈
-//             if (_onReturn == null) {
-//               Navigator.pop(context);
-//             } else {
-//               _onReturn(context);
-//             }
-//           },
-//         ),
-//         centerTitle: true,
-//         title: Text(
-//           _title,
-//           //style: Theme.of(context).textTheme.title,
-//         ),
-//       ),
-//     );
-//   }
-
-//   @override
-//   Size get preferredSize {
-//     return Size.fromHeight(kToolbarHeight);
-//   }
-// }
-
-/// 固定高度的appbar 模型
-class FixHeightAppBar extends StatelessWidget implements PreferredSizeWidget {
-  /// 布局代理
-  final Widget child;
-
-  @override
-  Widget build(BuildContext context) {
-    return child;
-  }
-
-  @override
-  Size get preferredSize {
-    return Size.fromHeight(kToolbarHeight);
-  }
-
-  /// 传入child
-  FixHeightAppBar({@required this.child});
-}
-
-
+import 'package:flutter/services.dart';
 
 /// 这是一个可以指定SafeArea区域背景色的AppBar
 /// PreferredSizeWidget提供指定高度的方法
@@ -118,53 +52,58 @@ class _CustomAppBarState extends State<CustomAppBar> {
   @override
   void initState() {
     super.initState();
+
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      child: SafeArea(
-        top: true,
-        child: Container(
-          height: widget.contentHeight,
-          decoration: UnderlineTabIndicator(
-            borderSide: BorderSide(width: 2.0, color: Color(0xF5F5F5)),
-            insets: EdgeInsets.zero
+
+    return AnnotatedRegion(
+      value: SystemUiOverlayStyle.dark,
+      child: Container(
+        color: Theme.of(context).backgroundColor,
+        child: SafeArea(
+          top: true,
+          child: Container(
+            height: widget.contentHeight,
+            decoration: UnderlineTabIndicator(
+              borderSide: BorderSide(width: 2.0, color: Colors.grey.shade300),
+              insets: EdgeInsets.zero
+            ),
+            child: Stack(
+              alignment: Alignment.center,
+              children: <Widget>[
+                Positioned(
+                  left: 0,
+                  child: Container(
+                    padding: const EdgeInsets.only(left: 5),
+                    child: widget._autoBackBtn 
+                      ? IconButton(icon: Icon(Icons.arrow_back_ios), onPressed: (){
+                        //  返回上一页,退栈
+                        if (widget._onReturn == null) {
+                          Navigator.pop(context);
+                        } else {
+                          widget._onReturn(context);
+                        }
+                      },)
+                      : widget.leadingWidget,
+                  ),
+                ),
+                Container(
+                  child: widget.titleWidget != null 
+                    ? widget.titleWidget
+                    : Text(widget._title, style: TextStyle(fontSize: 20),),
+                ),
+                Positioned(
+                  right: 0,
+                  child: Container(
+                    padding: EdgeInsets.only(right: 5),
+                    child: widget.trailingWidget,
+                  ),
+                ),
+              ],
+            )
           ),
-          child: Stack(
-            alignment: Alignment.center,
-            children: <Widget>[
-              Positioned(
-                left: 0,
-                child: Container(
-                  padding: const EdgeInsets.only(left: 5),
-                  child: widget._autoBackBtn 
-                    ? IconButton(icon: Icon(Icons.arrow_back), onPressed: (){
-                      //  返回上一页,退栈
-                      if (widget._onReturn == null) {
-                        Navigator.pop(context);
-                      } else {
-                        widget._onReturn(context);
-                      }
-                    },)
-                    : widget.leadingWidget,
-                ),
-              ),
-              Container(
-                child: widget.titleWidget != null 
-                  ? widget.titleWidget
-                  : Text(widget._title, style: TextStyle(fontSize: 20),),
-              ),
-              Positioned(
-                right: 0,
-                child: Container(
-                  padding: const EdgeInsets.only(right: 5),
-                  child: widget.trailingWidget,
-                ),
-              ),
-            ],
-          )
         ),
       ),
     );
