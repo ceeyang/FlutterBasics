@@ -47,7 +47,26 @@ class _EmergencySynergyActivityState extends State<EmergencySynergyActivity> {
             Container(color: Colors.grey[400], height: 30, width: 1,),
             SizedBox(width: 10),
             Text("航天微电机大厦 A 栋"),
-            FlatButton(child: Text("详情 v", textAlign: TextAlign.end,), onPressed: null)
+            SizedBox(width: 30),
+            GestureDetector(
+              child: Container(
+                margin: EdgeInsets.only(right: 10),
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                  border: Border.all(color: Colors.blue, width: 0.5),
+                  borderRadius: BorderRadius.circular((5.0)), // 圆角度
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    SizedBox(width: 5),
+                    Text("详情", style: TextStyle(color: Colors.white),),
+                    Icon(Icons.arrow_drop_down, color: Colors.white,),
+                  ],
+                ),
+              ),
+              onTap: (){},
+            ),
           ],
         ),
         SizedBox(height: 10),

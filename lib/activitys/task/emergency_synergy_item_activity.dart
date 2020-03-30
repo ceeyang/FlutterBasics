@@ -1,4 +1,8 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_basics/configs/constant_config.dart';
+import 'package:flutter_basics/utils/custom_utils.dart';
 
 class EmergencySynergyItemActivity extends StatefulWidget {
   
@@ -20,7 +24,13 @@ class EmergencySynergyItemActivity extends StatefulWidget {
 
 class _EmergencySynergyItemActivityState extends State<EmergencySynergyItemActivity> {
 
+  /// 九宫格高度
   double _gridViewHeight = 70;
+
+  /// 每行多少个
+  int _crossAxisCount = 5;
+
+  double _screenWidth,_itemWidth, _itemHeight;
 
   List<String> dataSource = [
     "fuck",
@@ -28,15 +38,7 @@ class _EmergencySynergyItemActivityState extends State<EmergencySynergyItemActiv
     "shit",
     "what?",
     "fuck",
-    "shit",
-    "what?",
-    "fuck",
-    "shit",
-    "what?",
-    "shit",
-    "what?",
-    "kidding?",
-    "23333"
+    "shit"
   ];
 
   @override
@@ -44,13 +46,26 @@ class _EmergencySynergyItemActivityState extends State<EmergencySynergyItemActiv
     // TODO: implement initState
     super.initState();
 
-    double numberOfLine = (dataSource.length ~/ 5).toInt().toDouble() + (dataSource.length % 5 == 0 ? 0.0 : 1.0);
-    print("numberOfLine: $numberOfLine");
+    dataSource = [];
+    for (int i = 0; i < 13; i++) {
+      dataSource.add("$i");
+    }
 
-    _gridViewHeight = numberOfLine * 65.0 + 20.0;
+    setState(() {});
+  }
 
-    debugPrint("$_gridViewHeight");
-
+  Widget _createGridView() {
+    return GridView(
+      //itemCount: dataSource.length,
+      physics: NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      padding: EdgeInsets.all(10), // padding
+      gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+        childAspectRatio: 0.6, 
+        maxCrossAxisExtent: 80
+      ),
+      children: initListWidget(dataSource)
+    );
   }
 
   _openBtnOnPressed() {
@@ -60,21 +75,21 @@ class _EmergencySynergyItemActivityState extends State<EmergencySynergyItemActiv
     });
   }
 
-  _buildGridActivity() {
+  _buildGridActivity(BuildContext context) {
     return Container(
       height: _gridViewHeight,
       child: GridView.count(
-        padding: EdgeInsets.all(10.0),
+        padding: EdgeInsets.all(LayoutConstant.default_margin),
         //一行多少个
-        crossAxisCount: 5,
+        crossAxisCount: _crossAxisCount,
         //滚动方向
         scrollDirection: Axis.vertical,
-        // 左右间隔
-        crossAxisSpacing: 10.0,
-        // 上下间隔
-        mainAxisSpacing: 10.0,
+        // // 左右间隔
+        // crossAxisSpacing: LayoutConstant.default_margin,
+        // // 上下间隔
+        // mainAxisSpacing: LayoutConstant.default_margin,
         //宽高比
-        childAspectRatio: 2 / 2,
+        childAspectRatio: _itemWidth / _itemHeight,
         //设置itemView 
         children: initListWidget(dataSource),
         physics: NeverScrollableScrollPhysics(),
@@ -85,12 +100,25 @@ class _EmergencySynergyItemActivityState extends State<EmergencySynergyItemActiv
   List<Widget> initListWidget(List<String> list) {
     List<Widget> lists = [];
     for (var item in list) {
-      lists.add(Container(
-        // height: 50.0,
-        // width: 50.0,
-        color: Colors.yellow,
-        child: Center(
-            child: Text(item)),
+      lists.add(GestureDetector(
+        child: Container(
+          // color: randomColor(),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Stack(
+                alignment: Alignment(0, 1.5),
+                children: <Widget>[
+                  CircleAvatar(backgroundImage: NetworkImage("https://randomuser.me/api/portraits/women/82.jpg"),radius: 30,),
+                  Icon(Icons.check_circle, color: Colors.green,)
+                ],
+              ),
+              SizedBox(height: 8),
+              Text("姓名: $item"),
+              Text("正常", style: TextStyle(color: Colors.green),)
+            ],
+          ),
+        ),
       ));
     }
     return lists;
@@ -130,15 +158,17 @@ class _EmergencySynergyItemActivityState extends State<EmergencySynergyItemActiv
     );
   }
 
-  _buildTypeWidget() {
+  _buildTypeWidget(BuildContext context) {
     return Column(
       children: <Widget>[
         Container(color: Colors.grey[400], height: 1),
         SizedBox(height: 10),
         _buildTypeTitleWidget(),
-        _buildGridActivity(),
-        _buildTypeTitleWidget(),
-        _buildGridActivity(),
+        _createGridView(),
+        // Container(color: Colors.grey[400], height: 1, width: _screenWidth*0.3,),
+        // SizedBox(height: 10),
+        // _buildTypeTitleWidget(),
+        // _buildGridActivity(context),
       ],
     );
   }
@@ -183,7 +213,7 @@ class _EmergencySynergyItemActivityState extends State<EmergencySynergyItemActiv
                   ],
                 ),
                 widget._isOpen
-                 ? _buildTypeWidget()
+                 ? _buildTypeWidget(context)
                  : Container(),
               ]
             )
